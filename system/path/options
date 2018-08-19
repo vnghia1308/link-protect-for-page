@@ -19,7 +19,7 @@ $o = mysqli_fetch_array($q)
 	</form>
 </div>
 <br>
-<div class="form-group">
+<!-- <div class="form-group">
 	<form id="AdminSecurity">
 		<h3>Truy cập bảo mật (cho admin)</h3>
 		<small>Chức năng này chưa được có hiệu lực vì chưa được thực thi rộng rãi</small><br>
@@ -34,4 +34,4 @@ $o = mysqli_fetch_array($q)
 			</label>
 		</div>
 	</form>
-</div>
+</div> -->
