@@ -1,0 +1,20 @@
+<table class="table table-bordered" id="adminTB">
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Protect Link</th>
+        <th>Post ID</th>
+      </tr>
+    </thead>
+    <tbody id="adminTBresult">
+<?php
+$LinkTB = mysqli_query($db, "SELECT * FROM `link` ORDER BY `id` DESC");
+while($link = mysqli_fetch_array($LinkTB)): ?>
+      <tr>
+        <td><?php echo $link['Url'] ?></td>
+        <td><?php echo $link['SUrl']?></td>
+        <td><?php echo $link['PostID']?></td>
+      </tr>
+<?php endwhile; ?>
+    </tbody>
+  </table>

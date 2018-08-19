@@ -1,0 +1,96 @@
+<form class="form-horizontal" method="POST">
+<div class="form-group">
+<label for="link" class="col-sm-2 control-label">Tên đại diện</label>
+<div class="col-sm-10">
+<input type="text" class="form-control" id="name" name="name" placeholder="Tên đại diện khi đăng nhập" value="<?= $admins['name'] ?>">
+</div>
+</div>
+
+<div class="form-group">
+<label for="password" class="col-sm-2 control-label">Mật khẩu</label>
+<div class="col-sm-10">
+<input type="password" class="form-control" id="pass" name="pass" placeholder="Mật khẩu đăng nhập" value="<?= $admins['password'] ?>">
+</div>
+</div>
+<div class="col-xs-12" style="text-align: center;">
+<button id="updateAdmin" type="button" class="btn btn-warning btn-fill">Cập nhật</button>
+</div>
+<br /><br />
+<div id="ketqua"></div>
+</form>
+<?php if($Level == 1): ?>
+<form id="adminAdd" class="form-horizontal" method="POST">
+<div class="form-group">
+<div class="col-sm-offset-2 col-sm-2">
+<label class="radio" style="padding-top: 0px;width: 200px;">
+<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" name="role" data-toggle="radio" value="1">Administrator
+</label>
+</div>
+<div class="col-sm-8">
+<label class="radio" style="padding-top: 0px;">
+<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" name="role" data-toggle="radio" value="2" checked>Moderator
+</label>
+</div>
+</div>
+<div class="form-group">
+<label for="name" class="col-sm-2 control-label">Tên người dùng</label>
+<div class="col-sm-10">
+<input type="text" class="form-control" id="name" name="name" placeholder="Tên người sử dụng tài khoản này">
+</div>
+</div>
+
+<div class="form-group">
+<label for="username" class="col-sm-2 control-label">Tài khoản</label>
+<div class="col-sm-10">
+<input type="text" class="form-control" id="username" name="username" placeholder="Tài khoản" autocomplete="off" autocorrect="off">
+</div>
+</div>
+
+<div class="form-group">
+<label for="password" class="col-sm-2 control-label">Mật khẩu</label>
+<div class="col-sm-10">
+<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" autocomplete="off">
+</div>
+</div>
+<div class="col-xs-12" style="text-align: center;">
+<button id="add" type="submit" class="btn btn-warning btn-fill">Thêm tài khoản</button>
+</div>
+</form>
+<?php endif; ?>
+
+
+<br>
+
+<table class="table table-bordered" id="adminTB">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+		<?php if($Level == 1): ?>
+        <th>Password</th>
+		<?php endif; ?>
+        <th>Roles</th>
+        <?php if($Level == 1): ?>
+        <th><center>Xóa tài khoản</center></th>
+        <?php endif; ?>
+      </tr>
+    </thead>
+    <tbody id="adminTBresult">
+<?php
+$AdminTB = mysqli_query($db, "SELECT * FROM `manager` WHERE 1 ORDER BY `id` DESC");
+while($ADMIN = mysqli_fetch_array($AdminTB)): ?>
+      <tr id="user-<?php echo $ADMIN['id'] ?>">
+        <td><?php echo $ADMIN['name'] ?> <?php echo ($ADMIN['username'] == $admin) ? '(Chính là bạn)' : null; ?></td>
+        <td><?php echo $ADMIN['username'] ?></td>
+        <?php if($Level == 1): ?>
+        <td><?php echo $ADMIN['password'] ?></td>
+        <?php endif; ?>
+        <td><?php echo ($ADMIN['roles'] == 1) ? 'Administrator' : 'Moderator'; ?></td>
+        <?php if($Level == 1): ?>
+        <td><center><a id="delete" data-id="<?php echo $ADMIN['id'] ?>" data-user="<?php echo $ADMIN['username'] ?>" style="cursor:pointer"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td>
+        <?php endif; ?>
+      </tr>
+<?php endwhile; ?>
+    </tbody>
+  </table>
+  <div id="Status"></div>

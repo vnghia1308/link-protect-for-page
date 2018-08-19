@@ -1,0 +1,37 @@
+<?php 
+$q = mysqli_query($db, "select * from options");
+$o = mysqli_fetch_array($q)
+?>
+<p id="updated_status" style="display:none">Các thay đổi đã được lưu lại</p>
+<div class="form-group">
+	<form id="GoogleShortLink">
+		<h3>Google Short Link</h3>
+		<div class="col-sm-1">
+			<label class="radio" style="padding-top: 0px;width: 200px;" onclick="GGSLinkOptions()">
+			<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" name="slink" data-toggle="radio" value="0" <?php if($o["google_short_link"] == 0) echo "checked" ?>>Tắt
+			</label>
+		</div>
+		<div class="col-sm-8">
+			<label class="radio" style="padding-top: 0px;" onclick="GGSLinkOptions()">
+			<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" name="slink" data-toggle="radio" value="1" <?php if($o["google_short_link"] == 1) echo "checked" ?>>Mở
+			</label>
+		</div>
+	</form>
+</div>
+<br>
+<div class="form-group">
+	<form id="AdminSecurity">
+		<h3>Truy cập bảo mật (cho admin)</h3>
+		<small>Chức năng này chưa được có hiệu lực vì chưa được thực thi rộng rãi</small><br>
+		<div class="col-sm-1">
+			<label class="radio" style="padding-top: 0px;width: 200px;">
+			<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" name="adminscrt" data-toggle="radio" value="0" <?php if($o["google_short_link"] == 0) echo "checked" ?>>Tắt
+			</label>
+		</div>
+		<div class="col-sm-8">
+			<label class="radio" style="padding-top: 0px;">
+			<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" name="adminscrt" data-toggle="radio" value="1" <?php if($o["google_short_link"] == 1) echo "checked" ?>>Mở
+			</label>
+		</div>
+	</form>
+</div>

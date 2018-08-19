@@ -1,0 +1,42 @@
+<?php if(isset($accessToken)):
+$q = mysqli_query($db, "select * from settings");
+$p = mysqli_fetch_array($q); ?>
+<form id="protect" class="form-horizontal"method="POST">
+<div class="form-group">
+<label for="link" class="col-sm-2 control-label">ID mục tiêu</label>
+<div class="col-sm-10">
+<input type="link" class="form-control" id="target" name="target" placeholder="ID mục tiêu" value="<?php if($p["page_id"] !== "null") echo $p["page_id"]?>">
+<small>*Hiện tại chỉ sử dụng cho Fanpage</small>
+</div>
+
+</div>
+<div class="form-group">
+<label for="link" class="col-sm-2 control-label">Link khóa</label>
+<div class="col-sm-10">
+<input type="link" class="form-control" id="link" name="link" placeholder="Link cần giấu">
+</div>
+</div>
+
+<div class="form-group">
+<label for="password" class="col-sm-2 control-label">Khóa mật khẩu</label>
+<div class="col-sm-10">
+<input type="password" class="form-control" id="pass" name="pass" placeholder="Password mở link">
+<br />Để trống nếu không đặt
+</div>
+</div>
+<!-- will don't apply, just for developer
+<div class="form-group">
+<label class="col-sm-2 control-label" style="padding-top: 0px;">Yêu cầu tags</label>
+<div class="col-sm-10">
+<label class="checkbox ct-blue" for="tags" style="padding-top: 0px;">
+<input type="checkbox" id="tags" name="tags" data-toggle="checkbox" value="1"> Phải tag 3 bạn bè vào mới được mở khóa</label></div>
+</div> -->
+<div class="col-xs-12" style="text-align: center;">
+<button id="lock-link" type="submit" class="btn btn-warning btn-fill">Tạo Link</button>
+</div>
+<div id="ketqua"></div>
+</form>
+<?php else: ?> 
+<div id="status"><center>Để tiếp tục sử dụng bạn vui lòng nhấn vào nút "<strong>kết nối</strong>".</center><br /></div>
+<center><a href="<?php echo $loginUrl ?>"><button id="btn-ketnoi" class="btn btn-primary btn-fill">Kết nối</button></a>
+<?php endif; ?>

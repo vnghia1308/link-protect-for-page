@@ -1,0 +1,51 @@
+<form id="contentWeb" class="form-horizontal" method="POST">
+<h3>Nội dung</h3>
+<div class="form-group">
+<label for="title" class="col-sm-2 control-label">Tiêu đề</label>
+<div class="col-sm-10">
+	<input type="text" class="form-control" id="title" name="title" placeholder="Tiêu đề website" value="<?php echo $web["title"] ?>">
+</div>
+</div>
+
+<div class="form-group">
+<label for="description" class="col-sm-2 control-label">Giới thiệu</label>
+<div class="col-sm-10">
+<input type="text" class="form-control" id="description" name="description" placeholder="Giới thiệu về trang web này" value="<?php echo $web["description"] ?>">
+</div>
+</div>
+
+<div class="form-group">
+<label for="description" class="col-sm-2 control-label">Bản quyền</label>
+<div class="col-sm-10">
+  <div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">&copy;</span>
+  <input type="text" class="form-control" id="copyright" name="copyright" placeholder="Bản quyền (dở dưới footer) của trang web" value="<?= $web["copyright"] ?>">
+</div>
+</div>
+</div>
+
+<h3>Kết nối Api</h3>
+<div class="form-group">
+<label for="description" class="col-sm-2 control-label">Facebook App ID</label>
+<div class="col-sm-10">
+	<input type="text" class="form-control" id="fbappid" name="fbappid" placeholder="Facebook App ID" value="<?= $web["fbappid"] ?>">
+</div>
+</div>
+
+<div class="form-group">
+<label for="description" class="col-sm-2 control-label">Facebook App Secrect</label>
+<div class="col-sm-10">
+	<input type="text" class="form-control" id="fbappsecret" name="fbappsecret" placeholder="Facebook App Secrect" value="<?php echo $web["fbappsc"] ?>">
+</div>
+</div>
+
+<div class="form-group">
+<label for="description" class="col-sm-2 control-label">Google Api Key</label>
+<div class="col-sm-10">
+	<input type="text" class="form-control" id="ggapikey" name="ggapikey" placeholder="Google Short URL Api Key" value="<?php echo $web["ggapi"] ?>">
+</div>
+</div>
+<div class="col-xs-12" style="text-align: center;">
+	<button id="update" type="submit" class="btn btn-warning btn-fill">Cập nhật</button>
+</div>
+</form>

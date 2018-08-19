@@ -1,0 +1,61 @@
+<div class="form-group"><div id="ShowHidenLogin"><a id="showLogin" style="cursor: pointer">[Nhấn hiện] Đăng nhập bằng Facebook để lấy access_token</a></div></div>
+
+<div id="LoginWithFacebook" style="display: none">
+	<br />
+	<form id="loginAccessToken" class="form-horizontal" method="POST">
+	<div class="form-group">
+	<label for="link" class="col-sm-2 control-label">Tài khoản Facebook</label>
+	<div class="col-sm-10">
+	<input type="text" class="form-control" id="username" name="u" placeholder="Tài khoản">
+	</div>
+	</div>
+
+	<div class="form-group">
+	<label for="password" class="col-sm-2 control-label">Mật khẩu Facebook</label>
+	<div class="col-sm-10">
+	<input type="password" class="form-control" id="password" name="p" placeholder="Mật khẩu">
+	</div>
+	</div>
+	<div class="col-xs-12" style="text-align: center;">
+	<button type="submit" class="btn btn-warning btn-fill">Đăng nhập</button>
+	</div>
+	</form>
+	<br />
+	<center><span id="loginResult" style="display:none">Sao chép tất cả văn bản của "Xác nhận chuyển hướng" sau đây và dán với vùng ở dưới! <a id="redirectConfirm" target="_blank">[Xác nhận chuyển hướng]</a></span></center>
+	<br />
+	<div class="form-group">
+		<textarea style="height: 150px" class="form-control" id="loginJson" onclick="this.focus();this.select()"></textarea>
+	</div>
+</div>
+
+<?php
+$q = mysqli_query($db, "select * from settings");
+$p = mysqli_fetch_array($q);
+ ?>
+
+<form id="confirmAccessToken" class="form-horizontal" method="POST">
+	<center><h3>Thiết đặt Trang</h3></center>
+	<div class="form-group">
+		<input type="text" class="form-control" id="access_token" name="access_token" placeholder="access_token" value="<?php if($p["access_token"] !== "null") echo $p["access_token"] ?>">
+	</div>
+	<div class="col-xs-12" style="text-align: center;">
+	<button type="submit" class="btn btn-warning btn-fill">Liệt kê Trang</button>
+	</div>
+</form>
+
+<div id="defaultPage">
+<?php
+if($p["access_token"] !== "null")
+{
+	$c = file_get_contents("https://graph.facebook.com/me?access_token=" . $p["page_access_token"]);
+	$i = json_decode($c, true);
+	
+	echo "Bạn đang chọn Trang <a href=""><b>" . $i["name"] . "</b></a> làm mặc định!";
+}
+?>
+</div>
+
+<div id="pageList">
+
+</div>
+<div id="pageStatus" style="display:none">Đã lưu thiết đặt</div>
