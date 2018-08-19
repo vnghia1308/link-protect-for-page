@@ -5,7 +5,7 @@ Config file: [dir]/system/config.php.<br>
 Admin page : [domain.com]/system/admin (default: admin / vynghia@69)
 
 ---
-(c) 2017 - 2018 Vy Nghia
+© 2017 - 2018 Vy Nghia
 Facebook: fb.com/nghiadev<br>
 Email: vynghia.cntt17@gmail.com
 
