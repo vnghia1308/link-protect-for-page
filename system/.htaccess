@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^admin/?$ admin.php [L]
+RewriteRule ^help/?$ help.php [L]
+RewriteRule ^login.php/?$ admin_login_fb.php [L]
