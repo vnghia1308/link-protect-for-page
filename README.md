@@ -23,10 +23,9 @@ Notice: only support for pages.
 --/system/class/ProtectClass.php
 
 >>Change log<<
-- Fixed error 500 of xuri.php
+- Fixed error 500 of index.php, xuri.php
 - Fixed error name after adding admin/mod account
 - Fixed error when import sql
-- Fixed index.php
 ```
 
 ---
