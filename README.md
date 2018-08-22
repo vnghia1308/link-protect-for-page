@@ -14,6 +14,8 @@ Notice: only support for pages.
 [22/06/2018]
 
 >>File changed<<
+--LinkProtect.sql
+--index.php
 --xuri.php
 --/system/admin.php
 --/system/admin_login_fb.php
