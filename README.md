@@ -22,8 +22,8 @@ Link Protect for Page v4 [Finnaly]
 ```
 
 ---
-© 2017 - 2018 Vy Nghia<br>
-Facebook: fb.com/nghiadev<br>
+© 2017 - 2018 [Vy Nghia](https://www.facebook.com/pagevynghia)<br>
+Facebook: [fb.com/nghiadev](https://www.facebook.com/nghiadev)<br>
 Email: vynghia.cntt17@gmail.com
 
 
