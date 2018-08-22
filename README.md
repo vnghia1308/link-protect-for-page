@@ -1,5 +1,8 @@
-# link-protect-for-page
+# Link Protect for Page
 Link Protect for Page v4 [Finnaly]
+```
+Notice: only support for pages.
+```
 
 [Install Guide]
 1. First, import LinkProtect.sql into Phpmyadmin<br>
