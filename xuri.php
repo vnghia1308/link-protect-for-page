@@ -1,6 +1,5 @@
 <?php
 /* >_ Developed by Vy Nghia */
-error_reporting(0);
 require_once 'login.php';
 
 if(isset($accessToken)){	
