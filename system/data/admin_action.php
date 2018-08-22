@@ -15,7 +15,7 @@ if(isset($_GET['action'])){
 			  $q = mysqli_query($db, "SHOW TABLE STATUS LIKE 'manager'");
 			  $r = mysqli_fetch_assoc($q);
 
-			  echo json_encode(array("code" => 1, "id" => $r["Auto_increment"]));
+			  echo json_encode(array("code" => 1, "id" => $r["Auto_increment"], "name" => $_POST['name']));
 			  
 			  mysqli_query($db, "INSERT INTO `manager`(`id`, `username`, `password`, `name`, `roles`, `session_key`) VALUES ('', '{$_POST['username']}', '{$_POST['password']}', '{$_POST['name']}', '{$_POST['role']}', '')");
           } 
