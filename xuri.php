@@ -38,7 +38,7 @@ if(isset($accessToken)){
 	$link->Check($db, $accessToken, $p["page_access_token"], $URL['Hash'], $URL['PostID'], $userID, $userName);
 		
 	if($FoundPost == true && $URL['PostID'] == 0)
-		mysql_query("UPDATE `link` SET `PostID` = '$FoundPostID' WHERE `Hash` = '{$_GET['x']}'");
+		mysqli_query($db, "UPDATE `link` SET `PostID` = '$FoundPostID' WHERE `Hash` = '{$_GET['x']}'");
 } else {
 	$_SESSION['back'] = $_SERVER['REQUEST_URI'];
 }
