@@ -14,10 +14,10 @@ Notice: only support for pages.
 [22/06/2018]
 
 >>File changed<<
---admin.php
---admin_action.php
 --xuri.php
---ProtectClass.php
+--/system/admin.php
+--/system/data/admin_action.php
+--/system/class/ProtectClass.php
 
 >>Change log<<
 - Fixed error 500 of xuri.php
