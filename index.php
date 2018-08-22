@@ -1,6 +1,4 @@
-<?php
-require_once 'login.php';
-?>
+<?php require_once 'login.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,18 +9,18 @@ require_once 'login.php';
 <title><?php echo $title ?></title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<base href="<?php echo $domain ?>" />
+<base href="<?= WEBURL ?>" />
 <meta name="description" content="<?php echo $description ?>">
 <meta name="author" content="Vy Nghia">
-<meta content="100015763034356" property="fb:admins" />
-<meta content="https://www.facebook.com/100015763034356" property="article:author" />
+<meta content="100022176820483" property="fb:admins" />
+<meta content="https://www.facebook.com/100022176820483" property="article:author" />
 
 <!-- Social meta --> 
 <meta property="og:title" content="<?php echo $title ?>" />
 <meta property="og:image" content="https://nghia.org/assets/img/web/thumbnail.jpg" />
 <meta property="og:site_name" content="<?php echo $title ?>" />
 <meta property="og:description" content="<?php echo $description ?>" />
-<meta property="og:url" content="http://nghia.org/" />
+<meta property="og:url" content="h<?= WEBURL ?>" />
 <meta property="fb:app_id" content="<?php $fbappid ?>" />
 
 <!-- CSS Lib -->
