@@ -1,6 +1,6 @@
 <?php
 /* >_ Developed by Vy Nghia */
-error_reporting(0);
+//error_reporting(0);
 require_once 'login.php';
 
 if(isset($accessToken)){	
@@ -19,7 +19,7 @@ if(isset($accessToken)){
 			{
 				if($_POST['password'] == $URL['Password'])
 				{
-					unset($PasswordLocked);
+					$PasswordLocked = false;
 				}
 			} 
 			else 
@@ -27,12 +27,16 @@ if(isset($accessToken)){
 				$PasswordLocked = "wrong";
 			}
 		}
+		else
+		{
+			$PasswordLocked = false;
+		}
 	}
 		
 	$q = mysqli_query($db, "select * from settings");
 	$p = mysqli_fetch_array($q);
 		
-	$link->Check($db, $accessToken, $p["page_access_token"], $URL['Hash'], $URL['PostID'], $URL['tags_require'], $userID, $userName);
+	$link->Check($db, $accessToken, $p["page_access_token"], $URL['Hash'], $URL['PostID'], $userID, $userName);
 		
 	if($FoundPost == true && $URL['PostID'] == 0)
 		mysql_query("UPDATE `link` SET `PostID` = '$FoundPostID' WHERE `Hash` = '{$_GET['x']}'");
@@ -141,7 +145,7 @@ Chào, <a href="https://facebook.com/" target="_blanks"><strong><?php echo isset
 <label class="checkbox ct-blue" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo ($FoundPost == true) ? 'checked' : null; ?>><?php echo (isset($FoundPost)) ? 'Đã xác nhận #hashtag của liên kết này' : 'Liên kết này chưa được gắn #hashtag'; ?></label>
 <?php endif; ?>
 <label class="checkbox ct-red" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo ($Liked == true) ? 'checked' : null; ?>><?php echo ($Liked == true) ? 'Bạn đã thích bài viết của liên kết này' : 'Bạn phải thích bài viết ở <b>Link bài gốc</b> mới có thể xem được nội dung'; ?></label>
-<label class="checkbox ct-orange" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo (empty($PasswordLocked)) ? 'checked' : null; ?>><?php echo (empty($PasswordLocked)) ? 'Khóa mật khẩu - OK!' : 'Liên kết này có mật khẩu, hãy điền mật khẩu để mở khóa'; ?></label>
+<label class="checkbox ct-orange" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo (!$PasswordLocked) ? 'checked' : null; ?>><?php echo (!$PasswordLocked) ? 'Khóa mật khẩu - OK!' : 'Liên kết này có mật khẩu, hãy điền mật khẩu để mở khóa'; ?></label>
 <?php if($PasswordLocked): ?>
 <form action="" method="POST">
 <div class="input-group">
@@ -181,7 +185,7 @@ Chào, <a href="https://facebook.com/" target="_blanks"><strong><?php echo isset
 <div id="qc" style="font-weight: bold; font-size: 17px;text-align: center;"></div>
 </div>
 </div> -->
-<?php if(isset($FoundPost) && isset($Liked) && empty($PasswordLocked)): /* && max($tagsCount, 0) == 0) */ ?>
+<?php if(isset($FoundPost) && isset($Liked) && !$PasswordLocked || $PasswordLocked == "wrong"): /* && max($tagsCount, 0) == 0) */ ?>
 <div class="panel panel-primary">
 <div class="panel-heading"><i class="fa fa-unlock"></i> Nội dung ẩn</div>
 <div class="panel-body">
