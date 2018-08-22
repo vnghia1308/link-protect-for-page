@@ -16,6 +16,7 @@ Notice: only support for pages.
 >>File changed<<
 --xuri.php
 --/system/admin.php
+--/system/admin_login_fb.php
 --/system/data/admin_action.php
 --/system/class/ProtectClass.php
 
