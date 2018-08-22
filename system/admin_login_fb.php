@@ -1,5 +1,7 @@
 <?php
 /* >_ Developed by Vy Nghia */
+error_reporting(false);
+
 session_start();
 require_once "config.php";
 require_once "../SDK/Facebook/autoload.php";
@@ -22,17 +24,17 @@ try {
 	if (isset($_SESSION['facebook_access_token'])) {
 		$accessToken = $_SESSION['facebook_access_token'];
 	} else {
-  		$accessToken = $helper->getAccessToken();
+		$accessToken = $helper->getAccessToken();
 	}
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
- 	// When Graph returns an error
- 	echo 'Graph returned an error: ' . $e->getMessage();
+	// When Graph returns an error
+	echo 'Graph returned an error: ' . $e->getMessage();
 
-  	exit;
+	exit;
 } catch(Facebook\Exceptions\FacebookSDKException $e) {
- 	// When validation fails or other local issues
+	// When validation fails or other local issues
 	echo 'Facebook SDK returned an error: ' . $e->getMessage();
-  	;
+	;
  }
 
 if (isset($accessToken)) {
@@ -42,7 +44,7 @@ if (isset($accessToken)) {
 		// getting short-lived access token
 		$_SESSION['facebook_access_token'] = (string) $accessToken;
 
-	  	// OAuth 2.0 client handler
+		// OAuth 2.0 client handler
 		$oAuth2Client = $fb->getOAuth2Client();
 
 		// Exchanges a short-lived access token for a long-lived one
@@ -77,4 +79,3 @@ if (isset($accessToken)) {
 	} else {
 	$loginUrl = $helper->getLoginUrl(WEBURL.'/system/login.php', $permissions);
 }
-?>
