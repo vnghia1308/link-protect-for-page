@@ -6,7 +6,7 @@ Link Protect for Page v4 [Finnaly]
 2. Edit config file in [dir]/system/config.php.<br>
 3. Game [domain.com]/system/admin (default: admin / vynghia@69)
 
-[Lastest update]
+# Lastest update
 ```
 [22/06/2018]
 
