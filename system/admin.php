@@ -222,7 +222,7 @@ $("input").keypress(function(event) {
 						if(r.code == 1){
 							$('#Status').html('<div class="alert alert-success"><strong>Thêm thành công!</strong> Tài khoản đã được thêm vào cơ sở dữ liệu ....</div>')
 							$('#adminTBresult').prepend('<tr id="user-' + r.id +'">'+
-			'<td>'+ $('#name').val() +'</td>'+
+			'<td>'+ r.name +'</td>'+
 			'<td>'+ $('#username').val() +'</td>'+
 			'<td>'+ $('#password').val() +'</td>'+
 			'<td>'+ roles +'</td>'+
