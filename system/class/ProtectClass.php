@@ -113,11 +113,12 @@ class Protect
 			$this->target_type = 'page';
 	}
 
-	public function Check($db, $accessToken, $Page_accessToken, $Hashtag, $PostID, $TagsRequire, $userID, $userName)
+	public function Check($db, $accessToken, $Page_accessToken, $Hashtag, $PostID, $userID, $userName)
 	{
 		global $FoundPost, $FoundPostID, $FoundPostURL, $Liked, $tagsCount, $Joined, $Groups;
 
 		
+		/* don't support for group
 		if($this->target_type == 'group')
 		{
 			$Groups = true;
@@ -139,6 +140,7 @@ class Protect
 				}
 			}
 		}
+		*/
 		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -160,8 +162,8 @@ class Protect
 					$FoundPost = true;
 					$FoundPostID = str_replace($this->target_id.'_', '',$feed['id']);
 										
-					$data_query = mysql_query("SELECT * FROM `link` WHERE `Hash` = '{$Hashtag}'");
-					$data = mysql_fetch_array($data_query);
+					$data_query = mysqli_query($db, "SELECT * FROM `link` WHERE `Hash` = '{$Hashtag}'");
+					$data = mysqli_fetch_array($data_query);
 
 					if($data['PostID'] == 0)
 						$feed['id'] = $this->target_id.'_'.$FoundPostID;
@@ -193,7 +195,7 @@ class Protect
 					$FindLike = json_decode($LikeApi);
 					foreach($FindLike->data as $like)
 					{
-						if($like->id == $userID)
+						if($like->name == $userName)
 						{
 							$Liked = true;
 						}
@@ -201,7 +203,7 @@ class Protect
 				}
 			}
 		}
-		
+				
 		/* will don't apply, just for developer
 		if($TagsRequire == 1)
 		{
