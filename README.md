@@ -25,6 +25,8 @@ Notice: only support for pages.
 >>Change log<<
 - Fixed error 500 of xuri.php
 - Fixed error name after adding admin/mod account
+- Fixed error when import sql
+- Fixed index.php
 ```
 
 ---
