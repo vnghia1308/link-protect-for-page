@@ -1,5 +1,5 @@
 # Link Protect for Page
-Link Protect for Page v4 [Finnaly]
+Link Protect for Page v4 [Finally]
 ```
 Notice: only support for pages.
 ```
@@ -34,4 +34,4 @@ Facebook: [fb.com/nghiadev](https://www.facebook.com/nghiadev)<br>
 Email: vynghia.cntt17@gmail.com
 
 
-Thank you for reading!
+Thanks for reading!
