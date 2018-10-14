@@ -11,21 +11,16 @@ Notice: only support for pages.
 
 # Lastest update
 ```
-[22/06/2018]
+[14/10/2018]
 
 >>File changed<<
---LinkProtect.sql
---index.php
---xuri.php
---/system/admin.php
---/system/admin_login_fb.php
---/system/data/admin_action.php
---/system/class/ProtectClass.php
+--/system/path/link
 
 >>Change log<<
 - Fixed error 500 of index.php, xuri.php
 - Fixed error name after adding admin/mod account
 - Fixed error when import sql
+- Add hash table
 ```
 
 ---
