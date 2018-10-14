@@ -2,7 +2,7 @@
     <thead>
       <tr>
         <th>URL</th>
-		<th>Hash</th>
+	<th>Hash</th>
         <th>Protect Link</th>
         <th>Post ID</th>
       </tr>
@@ -13,7 +13,7 @@ $LinkTB = mysqli_query($db, "SELECT * FROM `link` ORDER BY `id` DESC");
 while($link = mysqli_fetch_array($LinkTB)): ?>
       <tr>
         <td><?php echo $link['Url'] ?></td>
-		<td><?php echo $link['Hash']?></td>
+	<td><?php echo $link['Hash']?></td>
         <td><?php echo $link['SUrl']?></td>
         <td><?php echo $link['PostID']?></td>
       </tr>
