@@ -86,7 +86,7 @@ class Protect
 	public function fetchHash($db, $Hash)
 	{
 		global $URL;
-		$Select = mysqli_query($db, "SELECT * FROM `link` WHERE `Hash` = '$Hash'");
+		$Select = mysqli_query($con, "SELECT * FROM `link` WHERE `Hash` = '$Hash'");
 		$URL = mysqli_fetch_array($Select);
 	}
 	
@@ -162,7 +162,7 @@ class Protect
 					$FoundPost = true;
 					$FoundPostID = str_replace($this->target_id.'_', '',$feed['id']);
 										
-					$data_query = mysqli_query($db, "SELECT * FROM `link` WHERE `Hash` = '{$Hashtag}'");
+					$data_query = mysqli_query($con, "SELECT * FROM `link` WHERE `Hash` = '{$Hashtag}'");
 					$data = mysqli_fetch_array($data_query);
 
 					if($data['PostID'] == 0)
@@ -191,7 +191,8 @@ class Protect
 					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'/reactions?fields=id,name&pretty=0&live_filter=no_filter&limit=5000&access_token='.$Page_accessToken);
 					$LikeApi = curl_exec($ch);
 					curl_close($ch);
-										
+					
+						
 					$FindLike = json_decode($LikeApi);
 					foreach($FindLike->data as $like)
 					{
@@ -272,11 +273,11 @@ class CreateLink
 	
 	public function insertLink($db, $fbid, $hash, $targetid, $password, $link, $shortlink, $time)
 	{
-		mysqli_query($db, "INSERT INTO `link` (`id`, `user`, `password`, `TargetID`, `PostID`, `Hash`, `Url`, `SUrl`,  `time`) VALUES ('', '$fbid', '$password', '$targetid', '0', '$hash', '$link', '$shortlink', '$time')");	
+		mysqli_query($con, "INSERT INTO `link` (`id`, `user`, `password`, `TargetID`, `PostID`, `Hash`, `Url`, `SUrl`,  `time`) VALUES ('', '$fbid', '$password', '$targetid', '0', '$hash', '$link', '$shortlink', '$time')");	
 	}
 	
-	public function deleteLink($id)
+	public function deleteLink($con, $id)
 	{
-		mysqli_query($db, "DELETE FROM `link` WHERE `id` = '$id'");
+		mysqli_query($con, "DELETE FROM link WHERE id='$id'");
 	}
 }
