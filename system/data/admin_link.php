@@ -44,7 +44,7 @@ switch ($_GET['action']) {
 		if(isset($_POST['id']))
 		{
 			$link = new CreateLink;
-			$link->deleteLink($_POST['id']);
+			$link->deleteLink($db, $_POST['id']);
 		}
 		break;
 }
