@@ -271,7 +271,7 @@ class CreateLink
 		}
 	}
 	
-	public function insertLink($db, $fbid, $hash, $targetid, $password, $link, $shortlink, $time)
+	public function insertLink($con, $fbid, $hash, $targetid, $password, $link, $shortlink, $time)
 	{
 		mysqli_query($con, "INSERT INTO `link` (`id`, `user`, `password`, `TargetID`, `PostID`, `Hash`, `Url`, `SUrl`,  `time`) VALUES ('', '$fbid', '$password', '$targetid', '0', '$hash', '$link', '$shortlink', '$time')");	
 	}
