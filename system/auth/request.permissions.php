@@ -74,7 +74,7 @@ if (isset($accessToken)) {
 		exit;
 	}
 	} else {
-		$loginUrl = $helper->getLoginUrl(WEBURL.'/system/auth/test.php', $permissions);
+		$loginUrl = $helper->getLoginUrl(WEBURL.'/system/auth/request.permissions.php', $permissions);
 		header("Location: {$loginUrl}");
 	}	  
 }
