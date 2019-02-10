@@ -1,5 +1,7 @@
 <?php
 /* >_ Developed by Vy Nghia */
+error_reporting(0);
+
 require 'class/ProtectClass.php';
 define('WEBURL', 'https://cloud.nghia.org');
 
