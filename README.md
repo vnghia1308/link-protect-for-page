@@ -26,6 +26,7 @@ Notice: only support for pages.
 [10/02/2019]
 - update method, api, var,...
 - fixed error
+- support page (online)
 ```
 
 ---
