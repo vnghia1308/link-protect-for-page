@@ -1,7 +1,7 @@
 <?php
 /* >_ Developed by Vy Nghĩa */
 session_start();
-require "auth/admin_login_fb.php"; //include config.php
+require "auth/admin_fb_login.php"; //include config.php
 require 'data/admin_info.php';
 
 if(isset($_SESSION['admin']))
