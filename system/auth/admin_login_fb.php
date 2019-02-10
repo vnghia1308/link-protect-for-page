@@ -83,5 +83,5 @@ if (isset($accessToken)) {
 		exit;
 	}
 	} else {
-	$loginUrl = $helper->getLoginUrl(WEBURL.'/system/auth/admin_fb_login.php', $permissions);
+	$loginUrl = $helper->getLoginUrl(WEBURL.'/system/auth/admin_login_fb.php', $permissions);
 }
