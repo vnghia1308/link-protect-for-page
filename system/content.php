@@ -1,5 +1,5 @@
 <?php
-$WebST = mysqli_query($db, "SELECT * FROM `web`");
+$WebST = mysqli_query($con, "SELECT * FROM `web`");
 $web = mysqli_fetch_array($WebST);
 
 //content
