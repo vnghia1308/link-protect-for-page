@@ -30,8 +30,6 @@ Notice: only support for pages.
 ```
 
 ---
-© 2017 - 2018 [Vy Nghia](https://www.facebook.com/pagevynghia)
-Facebook: [fb.com/nghiadev](https://www.facebook.com/nghiadev)
-
+© 2017 - 2019 [Vy Nghia](https://www.facebook.com/pagevynghia)
 
 Thanks for reading!
