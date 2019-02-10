@@ -1,7 +1,6 @@
 <?php
 /* >_ Developed by Vy Nghia */
-//error_reporting(false);
-//session_start();
+session_start();
 
 if (strpos($_SERVER['SCRIPT_NAME'], 'admin.php') !== false) {
     require_once "config.php";
@@ -64,7 +63,7 @@ if (isset($accessToken)) {
 
 	// redirect the user back to the same page if it has "code" GET variable
 	if (isset($_GET['code'])) {
-			header("Location: admin?page=/protect/");
+			header("Location: /system/admin?page=/protect/");
 	}
 
 	// getting basic info about user
