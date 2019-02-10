@@ -28,11 +28,11 @@ class Database
 	}
 	
 	public function connect()
-	{
-		global $db;
-		
+	{		
 		$db = mysqli_connect($this->dbhost, $this->dbuser, $this->dbpass);
 		mysqli_select_db($db, $this->dbname);
+		
+		return $db;
 	}
 	
 	public function dbinfo($db)
@@ -86,7 +86,7 @@ class Protect
 	public function fetchHash($db, $Hash)
 	{
 		global $URL;
-		$Select = mysqli_query($con, "SELECT * FROM `link` WHERE `Hash` = '$Hash'");
+		$Select = mysqli_query($db, "SELECT * FROM `link` WHERE `Hash` = '$Hash'");
 		$URL = mysqli_fetch_array($Select);
 	}
 	
@@ -118,7 +118,7 @@ class Protect
 		global $FoundPost, $FoundPostID, $FoundPostURL, $Liked, $tagsCount, $Joined, $Groups;
 
 		
-		/* don't support for group
+		/* this is Link Protect for Page, so it dont support for group.
 		if($this->target_type == 'group')
 		{
 			$Groups = true;
@@ -162,7 +162,7 @@ class Protect
 					$FoundPost = true;
 					$FoundPostID = str_replace($this->target_id.'_', '',$feed['id']);
 										
-					$data_query = mysqli_query($con, "SELECT * FROM `link` WHERE `Hash` = '{$Hashtag}'");
+					$data_query = mysqli_query($db, "SELECT * FROM `link` WHERE `Hash` = '{$Hashtag}'");
 					$data = mysqli_fetch_array($data_query);
 
 					if($data['PostID'] == 0)
@@ -191,12 +191,11 @@ class Protect
 					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'/reactions?fields=id,name&pretty=0&live_filter=no_filter&limit=5000&access_token='.$Page_accessToken);
 					$LikeApi = curl_exec($ch);
 					curl_close($ch);
-					
 						
 					$FindLike = json_decode($LikeApi);
 					foreach($FindLike->data as $like)
 					{
-						if($like->name == $userName)
+						if($like->id == $userID)
 						{
 							$Liked = true;
 						}

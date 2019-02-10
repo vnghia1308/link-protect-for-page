@@ -1,12 +1,12 @@
 <?php
 /* >_ Developed by Vy Nghĩa */
 session_start();
-require "admin_login_fb.php"; //include config.php
+require "auth/admin_login_fb.php"; //include config.php
 require 'data/admin_info.php';
 
 if(isset($_SESSION['admin']))
 {
-	$checksession = mysqli_query($db, "SELECT * FROM `manager` WHERE `username` = '{$_SESSION['admin']}'");
+	$checksession = mysqli_query($con, "SELECT * FROM `manager` WHERE `username` = '{$_SESSION['admin']}'");
 	$admins = mysqli_fetch_array($checksession);
 }
 ?>
@@ -59,7 +59,7 @@ if(isset($_SESSION['admin']))
 <a href="system/admin?page=/protect/"><li class="btn btn-primary btn-round bttn-unite bttn-lg bttn-primary">Tạo liên kết</li></a>
 <a href="system/admin?page=/options/"><li class="btn btn-primary btn-round bttn-unite bttn-lg bttn-primary">Tùy chọn hệ thống</li></a>
 <a href="system/admin?page=/content/"><li class="btn btn-primary btn-round bttn-unite bttn-lg bttn-primary">Nội dung</li></a>
-<a href="system/help"><li class="btn btn-primary btn-round bttn-unite bttn-lg bttn-primary">Hổ trợ</li></a>
+<a href="system/admin?page=/help/"><li class="btn btn-primary btn-round bttn-unite bttn-lg bttn-primary">Trợ giúp</li></a>
 <a href="system/logout.php"><li class="btn btn-primary btn-round bttn-unite bttn-lg bttn-primary">Thoát</li></a>
 </ul>
 </div>
@@ -94,6 +94,9 @@ if (isset($_GET['page'])) {
 	  break;
     case '/content/':
       echo 'Nội dung';
+      break;
+	case '/help/':
+      echo 'Trợ giúp';
       break;
     }
 } else {
@@ -140,7 +143,7 @@ else
 			break;
 			/* Web Content Settings */
 			case '/content/':
-				$WebST = mysqli_query($db, "SELECT * FROM `web`");
+				$WebST = mysqli_query($con, "SELECT * FROM `web`");
 				$web = mysqli_fetch_array($WebST);
 
 				if($Level == 1)
@@ -159,6 +162,11 @@ else
 				else
 					echo "Chỉ quản trị viên mới có thể truy cập trang này!";
 			break;
+			/* Help/Support Center */
+			case '/help/':
+				$support_url = "https://cdn.nghia.org/code/product/link-protect/help.php";
+				echo file_get_contents($support_url);
+				break;
 		}
 	}
 }
@@ -188,15 +196,16 @@ else
 <script src="assets/js/clipboard.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js"></script>
 <script>
-$("input").keypress(function(event) {
-    if (event.which == 13) {
-        event.preventDefault();
-        $(".btn").click();
-    }
-});
+		$("input").keypress(function(event) {
+			if (event.which == 13) {
+				event.preventDefault();
+				$(".btn").click();
+			}
+		});
 		var clipboard = new Clipboard('.btn');
 		
 		<?php if(isset($_SESSION['admin'])): ?>
+		// --> ~/path/role
 		$("#adminAdd").on('submit',(function(e) {
 			e.preventDefault();
 			if($("input[name='role']:checked").val() == 1)
@@ -240,6 +249,7 @@ $("input").keypress(function(event) {
 
 		}));
 
+	// --> ~/path/protect
     $("#protect").on('submit',(function(e) {
 			e.preventDefault();
 			$.ajax({
@@ -261,7 +271,8 @@ $("input").keypress(function(event) {
 			});
 
 		}));
-		
+	
+	// --> ~/path/web
 	$("#contentWeb").on('submit',(function(e) {
 		e.preventDefault();
 		$.ajax({
@@ -449,6 +460,22 @@ $("input").keypress(function(event) {
 		});
 	}));
 	
+	// --> ~/path/page
+		$("#generate_acess_token_page").on('click',(function(e) {
+			var popup = window.open('system/auth/request.permissions.php','google','width=800,height=600,status=0,toolbar=0');
+			
+			popup.onbeforeunload = function(){
+				var access_token = popup.document.documentElement.innerText;
+				$("#access_token").val(access_token)
+				if(access_token.includes("EAA") || access_token.includes("ZDZD")){
+					$("#confirmAccessToken").submit()
+				} else {
+					console.log('cant parse this access_token');
+				}
+			}
+		}));
+		
+	// --> ~/path/page
 	$("#confirmAccessToken").on('submit',(function(e) {
 		e.preventDefault();
 		$.ajax({
@@ -479,6 +506,7 @@ $("input").keypress(function(event) {
 		});
 	}));
 	
+	// --> ~/path/page
 	$('#loginJson').on('paste', function () {
 		setTimeout(function () {
 			var t = $('#loginJson').val()
@@ -510,6 +538,7 @@ $("input").keypress(function(event) {
 		}, 100);
 	});
 	
+	// --> ~/path/page
 	$("#ShowHidenLogin").on("click", "#showLogin", function(){
 		$("#showLogin").text("[Nhấn ẩn] Đăng nhập bằng Facebook để lấy access_token").attr("id", "hideLogin")
 		$("#LoginWithFacebook").show()

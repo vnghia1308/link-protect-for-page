@@ -29,7 +29,7 @@
 </div>
 
 <?php
-$q = mysqli_query($db, "select * from settings");
+$q = mysqli_query($con, "select * from settings");
 $p = mysqli_fetch_array($q);
  ?>
 
@@ -39,7 +39,7 @@ $p = mysqli_fetch_array($q);
 		<input type="text" class="form-control" id="access_token" name="access_token" placeholder="access_token" value="<?php if($p["access_token"] !== "null") echo $p["access_token"] ?>">
 	</div>
 	<div class="col-xs-12" style="text-align: center;">
-	<button type="submit" class="btn btn-warning btn-fill">Liệt kê Trang</button>
+	<button type="submit" class="btn btn-warning btn-fill">Liệt kê Trang</button> <button id="generate_acess_token_page" class="btn btn-warning btn-fill">Tạo mã access_token</button>
 	</div>
 </form>
 
@@ -47,10 +47,24 @@ $p = mysqli_fetch_array($q);
 <?php
 if($p["access_token"] !== "null")
 {
-	$c = file_get_contents("https://graph.facebook.com/me?access_token=" . $p["page_access_token"]);
-	$i = json_decode($c, true);
+	set_error_handler(
+		function ($severity, $message, $file, $line) {
+			throw new ErrorException($message, $severity, $severity, $file, $line);
+		}
+	);
+	try {
+		$c = file_get_contents("https://graph.facebook.com/me?access_token=" . $p["page_access_token"]);
+		$i = json_decode($c, true);
+		
+		echo 'Bạn đang chọn Trang <a href=""><b>' . $i["name"] . '</b></a> làm mặc định!';
+	}
+	catch (Exception $e) {
+		if (\strpos($e->getMessage(), 'HTTP/1.1 400 Bad Request') !== false) {
+			echo 'access_token hết hạn';
+		}
+	}
 	
-	echo "Bạn đang chọn Trang <a href=""><b>" . $i["name"] . "</b></a> làm mặc định!";
+	restore_error_handler();
 }
 ?>
 </div>

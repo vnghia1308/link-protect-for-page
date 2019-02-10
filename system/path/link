@@ -9,7 +9,7 @@
     </thead>
     <tbody id="adminTBresult">
 <?php
-$LinkTB = mysqli_query($db, "SELECT * FROM `link` ORDER BY `id` DESC");
+$LinkTB = mysqli_query($con, "SELECT * FROM `link` ORDER BY `id` DESC");
 while($link = mysqli_fetch_array($LinkTB)): ?>
       <tr>
         <td><?php echo $link['Url'] ?></td>

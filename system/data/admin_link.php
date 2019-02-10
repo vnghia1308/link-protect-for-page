@@ -12,7 +12,7 @@ switch ($_GET['action']) {
 			if(isset($_POST['link']))
 			{
 				
-			$qr = mysqli_query($db, "select * from options");
+			$qr = mysqli_query($con, "select * from options");
 			$op = mysqli_fetch_array($qr);
 
 			$user = new Protect;
@@ -35,7 +35,7 @@ switch ($_GET['action']) {
 			else
 				$LinkProtect = $LockedLink;
 			
-			$link->insertLink($db, $userID, $EncodeLink, $_POST['target'], $_POST['pass'], $_POST['link'], $LinkProtect, date("Y-m-d H:i:s"));
+			$link->insertLink($con, $userID, $EncodeLink, $_POST['target'], $_POST['pass'], $_POST['link'], $LinkProtect, date("Y-m-d H:i:s"));
 			}
 		}
 		break;
@@ -44,7 +44,7 @@ switch ($_GET['action']) {
 		if(isset($_POST['id']))
 		{
 			$link = new CreateLink;
-			$link->deleteLink($db, $_POST['id']);
+			$link->deleteLink($con, $_POST['id']);
 		}
 		break;
 }

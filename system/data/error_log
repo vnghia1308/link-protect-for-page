@@ -1,0 +1,2 @@
+[10-Feb-2019 09:44:41 Asia/Ho_Chi_Minh] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ctjoppmqhosting/public_html/nghia.org/cloud/system/data/admin_token.php on line 14
+[10-Feb-2019 09:50:37 Asia/Ho_Chi_Minh] PHP Warning:  mysql_close() expects parameter 1 to be resource, object given in /home/ctjoppmqhosting/public_html/nghia.org/cloud/system/data/admin_token.php on line 14

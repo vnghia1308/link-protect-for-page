@@ -1,5 +1,5 @@
 <?php if(isset($accessToken)):
-$q = mysqli_query($db, "select * from settings");
+$q = mysqli_query($con, "select * from settings");
 $p = mysqli_fetch_array($q); ?>
 <form id="protect" class="form-horizontal"method="POST">
 <div class="form-group">
@@ -20,8 +20,8 @@ $p = mysqli_fetch_array($q); ?>
 <div class="form-group">
 <label for="password" class="col-sm-2 control-label">Khóa mật khẩu</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="pass" name="pass" placeholder="Password mở link">
-<br />Để trống nếu không đặt
+<input type="text" class="form-control" id="pass" name="pass" placeholder="Password mở link">
+<small>*Để trống nếu không đặt</small>
 </div>
 </div>
 <!-- will don't apply, just for developer

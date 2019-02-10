@@ -1,5 +1,5 @@
 <?php 
-$q = mysqli_query($db, "select * from options");
+$q = mysqli_query($con, "select * from options");
 $o = mysqli_fetch_array($q)
 ?>
 <p id="updated_status" style="display:none">Các thay đổi đã được lưu lại</p>

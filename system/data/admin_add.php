@@ -8,11 +8,11 @@ if(isset($_GET['action'])){
     case 'add':
       if(isset($_SESSION['admin']) && isset($_POST['role']) && isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password']))
 	  {
-      $checkUser = mysqli_query($db, "SELECT * FROM `manager` WHERE `username` = '{$_POST['username']}'"); //Check user exists in SQL
+      $checkUser = mysqli_query($con, "SELECT * FROM `manager` WHERE `username` = '{$_POST['username']}'"); //Check user exists in SQL
           if(mysqli_fetch_array($checkUser) == false)
 		  {
 			  echo (1);
-			  mysqli_query($db, "INSERT INTO `manager`(`id`, `fbid`, `username`, `password`, `name`, `roles`) VALUES ('', '', '{$_POST['username']}', '{$_POST['password']}', '{$_POST['name']}', '{$_POST['role']}')");
+			  mysqli_query($con, "INSERT INTO `manager`(`id`, `fbid`, `username`, `password`, `name`, `roles`) VALUES ('', '', '{$_POST['username']}', '{$_POST['password']}', '{$_POST['name']}', '{$_POST['role']}')");
           } 
 		  else
 			echo (2);
@@ -26,7 +26,7 @@ if(isset($_GET['action'])){
 	  {
         if ($Level == 1)
 		{
-          mysqli_query($db, "DELETE FROM `manager` WHERE `username` = '{$_POST['user']}'");
+          mysqli_query($con, "DELETE FROM `manager` WHERE `username` = '{$_POST['user']}'");
         }
       }
     }
