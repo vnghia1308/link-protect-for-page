@@ -5,9 +5,9 @@ define('WEBURL', 'https://cloud.nghia.org');
 
 $db = new Database;
 $db->dbhost('localhost');
-$db->dbuser('ctjoppmqhosting_vnghia');
-$db->dbpass('1151985611');
-$db->dbname('ctjoppmqhosting_nghia');
+$db->dbuser('db_user');
+$db->dbpass('db_pass');
+$db->dbname('db_name');
 
 $con = $db->connect(); // mysqli var is $con
 
