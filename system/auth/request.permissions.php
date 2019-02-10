@@ -16,7 +16,7 @@ if(isset($_SESSION["admin"])){
 	  ]);
 
 $helper = $fb->getRedirectLoginHelper();
-$permissions = ['public_profile', 'publish_pages']; //default, no change if u dont know what's it
+$permissions = ['public_profile', 'pages_show_list']; //default, no change if u dont know what's it
 
 try {
 	if (isset($_SESSION['facebook_access_token'])) {
