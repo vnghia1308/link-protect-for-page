@@ -53,10 +53,7 @@ if (isset($accessToken)) {
 	// redirect the user back to the same page if it has "code" GET variable
 	if (isset($_GET['code'])) {
 		if(isset($_SERVER['HTTP_REFERER'])){
-		  if($_SERVER['HTTP_REFERER'] == 'https://www.facebook.com/')
-				  header("Location: {$_SESSION['back']}");
-			else 
-			  header("Location: {$_SERVER['HTTP_REFERER']}"); 
+		  header("Location: {$_SESSION['back']}");
 		}
 		else
 			header("Location: {$_SESSION['back']}");
