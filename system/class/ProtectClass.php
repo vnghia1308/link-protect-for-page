@@ -85,9 +85,10 @@ class Protect
 	
 	public function fetchHash($db, $Hash)
 	{
-		global $URL;
 		$Select = mysqli_query($db, "SELECT * FROM `link` WHERE `Hash` = '$Hash'");
 		$URL = mysqli_fetch_array($Select);
+		
+		return $URL;
 	}
 	
 	public function setTargetID($target_id)
@@ -114,9 +115,7 @@ class Protect
 	}
 
 	public function Check($db, $accessToken, $admin_accessToken, $Hashtag, $PostID, $userID, $userName)
-	{
-		global $FoundPost, $FoundPostID, $FoundPostURL, $Liked, $tagsCount, $Joined, $Groups;
-		
+	{		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_VERBOSE, 1);
@@ -126,9 +125,7 @@ class Protect
 		$FeedApi  = curl_exec($ch);
 		curl_close($ch);
 		$FeedJson = json_decode($FeedApi, true);
-		
-		//echo 'https://graph.facebook.com/'.$this->target_id.'/feed?limit=100&access_token='.$accessToken;
-		
+				
 		if(is_array($FeedJson) or is_object($FeedJson))
 		{
 			foreach($FeedJson['data'] as &$feed) {
