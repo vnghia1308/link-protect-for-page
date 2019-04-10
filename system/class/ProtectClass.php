@@ -116,31 +116,6 @@ class Protect
 	public function Check($db, $accessToken, $admin_accessToken, $Hashtag, $PostID, $userID, $userName)
 	{
 		global $FoundPost, $FoundPostID, $FoundPostURL, $Liked, $tagsCount, $Joined, $Groups;
-
-		
-		/* this is Link Protect for Page, so it dont support for group.
-		if($this->target_type == 'group')
-		{
-			$Groups = true;
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_VERBOSE, 1);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-			curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/'.$this->target_id.'/members?limit=5000&access_token='.$accessToken);
-			$MemberJson  = curl_exec($ch);
-			curl_close($ch);
-			$MemberData = json_decode($MemberJson);
-						
-			foreach($MemberData->data as $members)
-			{
-				if($members->id == $userID)
-				{
-					$Joined = true;
-				}
-			}
-		}
-		*/
 		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
