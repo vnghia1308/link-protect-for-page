@@ -113,7 +113,7 @@ class Protect
 			$this->target_type = 'page';
 	}
 
-	public function Check($db, $accessToken, $Page_accessToken, $Hashtag, $PostID, $userID, $userName)
+	public function Check($db, $accessToken, $admin_accessToken, $Hashtag, $PostID, $userID, $userName)
 	{
 		global $FoundPost, $FoundPostID, $FoundPostURL, $Liked, $tagsCount, $Joined, $Groups;
 
@@ -147,18 +147,19 @@ class Protect
 		curl_setopt($ch, CURLOPT_VERBOSE, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-		curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/'.$this->target_id.'/feed?limit=100&access_token='.$accessToken);
+		curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/'.$this->target_id.'/feed?limit=100&access_token='.$admin_accessToken);
 		$FeedApi  = curl_exec($ch);
 		curl_close($ch);
 		$FeedJson = json_decode($FeedApi, true);
-				
-		//echo $Hashtag;
+		
+		//echo 'https://graph.facebook.com/'.$this->target_id.'/feed?limit=100&access_token='.$accessToken;
 		
 		if(is_array($FeedJson) or is_object($FeedJson))
 		{
 			foreach($FeedJson['data'] as &$feed) {
 				if(strpos(@$feed['message'], $Hashtag) !== FALSE)
 				{
+					$Liked = false;
 					$FoundPost = true;
 					$FoundPostID = str_replace($this->target_id.'_', '',$feed['id']);
 										
@@ -176,32 +177,44 @@ class Protect
 					curl_setopt($ch, CURLOPT_VERBOSE, 1);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'?fields=id,permalink_url,message&access_token='.$accessToken);
+					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'?fields=id,permalink_url,message&access_token='.$admin_accessToken);
 					$PostApi = curl_exec($ch);
 					curl_close($ch);
-					$PostPage = json_decode($PostApi);
+					$_post = json_decode($PostApi);
 										
-					$FoundPostURL = $PostPage->permalink_url;
+					$FoundPostURL = $_post->permalink_url;
 
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 					curl_setopt($ch, CURLOPT_VERBOSE, 1);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'/reactions?fields=id,name&pretty=0&live_filter=no_filter&limit=5000&access_token='.$Page_accessToken);
+					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'/reactions?fields=id,name&pretty=0&live_filter=no_filter&limit=5000&access_token='.$admin_accessToken);
 					$LikeApi = curl_exec($ch);
 					curl_close($ch);
 						
 					$FindLike = json_decode($LikeApi);
 					foreach($FindLike->data as $like)
 					{
-						if($like->id == $userID)
+						if($like->name == $userName)
 						{
 							$Liked = true;
 						}
 					}
+					
+					$checkResult = array(
+						"Liked" => $Liked,
+						"FoundPost" => $FoundPost,
+						"FoundPostID" => $FoundPostID,
+						"FoundPostURL" => $FoundPostURL
+					);
+					
+					
+					return $checkResult;
 				}
 			}
+		} else {
+			return;
 		}
 				
 		/* will don't apply, just for developer
