@@ -27,6 +27,10 @@ Notice: only support for pages.
 - update method, api, var,...
 - fixed error
 - support page (online)
+[15/04/2019]
+- Fix sone bugs
+- Change class library
+- etc.
 ```
 
 ---
