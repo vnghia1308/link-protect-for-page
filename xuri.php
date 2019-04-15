@@ -37,7 +37,7 @@ if(isset($accessToken)){
 	$_c = $link->Check($con, $accessToken, $p["access_token"], $URL['Hash'], $URL['PostID'], $userID, $userName);
 		
 	if($_c["FoundPost"] && $URL['PostID'] == 0)
-		mysqli_query($con, "UPDATE `link` SET `PostID` = '$FoundPostID' WHERE `Hash` = '{$_GET['x']}'");
+		mysqli_query($con, "UPDATE `link` SET `PostID` = '{$_c["FoundPostID"]}' WHERE `Hash` = '{$_GET['x']}'");
 } else {
 	$_SESSION['back'] = $_SERVER['REQUEST_URI'];
 }
@@ -130,14 +130,15 @@ Chào, <a href="https://facebook.com/" target="_blanks"><strong><?php echo isset
 <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px;">
 <div class="panel-body" style="word-wrap: break-word">
 <center><strong>Link bài viết gốc:</strong><br />
-<a style="color: black; font-size: 17px;" <?php echo ($FoundPostURL !== null) ? 'href="'.$FoundPostURL.'"' : null;?> target="_blank" ><?php echo ($FoundPostURL !== null) ? $FoundPostURL : 'Link khóa này chưa được cập nhật link bài viết trong Page/Group';?></a></center>
+<a style="color: black; font-size: 17px;" href="<?php echo ($c_["FoundPostURL"] !== "") ? $_c["FoundPostURL"] : ''; ?>" target="_blank" ><?php echo ($c_["FoundPostURL"] !== "") ? $_c["FoundPostURL"] : 'Link khóa này chưa được cập nhật link bài viết trong Page/Group'; ?></a>
+</center>
 </div>
 </div>
 <div class="col-xs-12">
 <strong>Kiểm tra điều kiện mở khóa:</strong><br />
 <?php // if($URL['tags_require'] == 1): ?>
 <!-- <label class="checkbox ct-blue" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo (max($tagsCount, 0) == 0) ? 'checked' : 'unchecked'; ?>><?php echo (max($tagsCount, 0) == 0) ? 'Bạn đã hoàn thành gắn thẻ 3 người bạn' : 'Vui lòng gắn thẻ 3 người bạn vào liên kết bài viết trên (có thể cộng dồn)'; ?></label>-->
-<?php if($Groups == true): ?>
+<?php if(false): ?>
 <label class="checkbox ct-blue" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo ($Joined == true) ? 'checked' : null; ?>><?php echo ($Joined == true) ? 'Bạn đã là thành viên của nhóm' : 'Bạn chưa là thành viên của nhóm'; ?></label>
 <?php else: ?>
 <label class="checkbox ct-blue" for="checkbox1"><input type="checkbox" value="" data-toggle="checkbox" <?php echo ($_c["FoundPost"] == true) ? 'checked' : null; ?>><?php echo (isset($FoundPost)) ? 'Đã xác nhận #hashtag của liên kết này' : 'Liên kết này chưa được gắn #hashtag'; ?></label>
