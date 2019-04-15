@@ -52,11 +52,8 @@ if (isset($accessToken)) {
 
 	// redirect the user back to the same page if it has "code" GET variable
 	if (isset($_GET['code'])) {
-		if(isset($_SERVER['HTTP_REFERER'])){
-		  header("Location: {$_SESSION['back']}");
-		}
-		else
-			header("Location: {$_SESSION['back']}");
+		$url = str_replace("///", "/", WEBURL . "{$_SESSION['back']}");
+		header("Location: $url");
 		unset($_SESSION['back']);
 	}
 
