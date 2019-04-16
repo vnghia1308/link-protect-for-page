@@ -34,7 +34,7 @@ if(isset($accessToken)){
 	$q = mysqli_query($con, "select * from settings");
 	$p = mysqli_fetch_array($q);
 		
-	$_c = $link->Check($con, $accessToken, $p["access_token"], $URL['Hash'], $URL['PostID'], $userID, $userName);
+	$_c = $link->Check($con, $accessToken, $p["page_access_token"], $URL['Hash'], $URL['PostID'], $userID, $userName);
 		
 	if($_c["FoundPost"] && $URL['PostID'] == 0)
 		mysqli_query($con, "UPDATE `link` SET `PostID` = '{$_c["FoundPostID"]}' WHERE `Hash` = '{$_GET['x']}'");
