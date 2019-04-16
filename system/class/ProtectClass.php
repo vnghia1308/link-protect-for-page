@@ -114,14 +114,14 @@ class Protect
 			$this->target_type = 'page';
 	}
 
-	public function Check($db, $accessToken, $admin_accessToken, $Hashtag, $PostID, $userID, $userName)
+	public function Check($db, $accessToken, $page_accessToken, $Hashtag, $PostID, $userID, $userName)
 	{		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_VERBOSE, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-		curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/'.$this->target_id.'/feed?limit=100&access_token='.$admin_accessToken);
+		curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/'.$this->target_id.'/feed?limit=100&access_token='.$page_accessToken);
 		$FeedApi  = curl_exec($ch);
 		curl_close($ch);
 		$FeedJson = json_decode($FeedApi, true);
@@ -149,7 +149,7 @@ class Protect
 					curl_setopt($ch, CURLOPT_VERBOSE, 1);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'?fields=id,permalink_url,message&access_token='.$admin_accessToken);
+					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'?fields=id,permalink_url,message&access_token='.$page_accessToken);
 					$PostApi = curl_exec($ch);
 					curl_close($ch);
 					$_post = json_decode($PostApi);
@@ -161,7 +161,7 @@ class Protect
 					curl_setopt($ch, CURLOPT_VERBOSE, 1);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'/reactions?fields=id,name&pretty=0&live_filter=no_filter&limit=5000&access_token='.$admin_accessToken);
+					curl_setopt($ch,CURLOPT_URL, 'https://graph.facebook.com/v2.10/'.$feed['id'].'/reactions?fields=id,name&pretty=0&live_filter=no_filter&limit=5000&access_token='.$page_accessToken);
 					$LikeApi = curl_exec($ch);
 					curl_close($ch);
 						
