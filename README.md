@@ -1,5 +1,6 @@
 # Link Protect for Page
 Link Protect for Page v4 [Finally]
+Credit: anlink.top
 ```
 Notice: only support for pages.
 ```
